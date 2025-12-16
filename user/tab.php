@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tab</title>
+</head>
+<body>
+    <a href="../backend/logout.php">
+        <button>Log Out</button>
+    </a>
+</body>
+</html>

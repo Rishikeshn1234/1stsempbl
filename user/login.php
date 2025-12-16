@@ -89,13 +89,14 @@
         .register-link a:hover {
             text-decoration: underline;
         }
+
     </style>
 </head>
 <body>
 
 <div class="login-container">
     <h2>Login</h2>
-    <form method="post" action="backend/gate.php">
+    <form method="post" action="../backend/gate.php">
         <div class="form-group">
             <label>Username</label>
             <input type="text" name="uname" placeholder="Enter username" required>
@@ -106,7 +107,7 @@
             <input type="password" name="password" placeholder="Enter password" required>
         </div>
 
-        <button type="submit" name="lsubmit" class="login-btn">Login</button>
+        <button type="submit" name="lsubmit" value="submit" class="login-btn">Login</button>
     </form>
 
     <div class="register-link">

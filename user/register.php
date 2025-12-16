@@ -95,7 +95,7 @@
 
 <div class="register-container">
     <h2>Register</h2>
-    <form method="post" action="backend/gate.php">
+    <form method="post" action="../backend/gate.php">
         <div class="form-group">
             <label>Username</label>
             <input type="text" name="uname" placeholder="Enter username" required>
@@ -116,7 +116,7 @@
             <input type="password" name="cpassword" placeholder="Confirm password" required>
         </div>
 
-        <button type="submit" name="rsubmit" class="register-btn">Register</button>
+        <button type="submit" value="submit" name="rsubmit" class="register-btn">Register</button>
     </form>
 
     <div class="login-link">
