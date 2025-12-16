@@ -95,32 +95,32 @@
 
 <div class="register-container">
     <h2>Register</h2>
-    <form>
+    <form method="post" action="backend/gate.php">
         <div class="form-group">
             <label>Username</label>
-            <input type="text" placeholder="Enter username" required>
+            <input type="text" name="uname" placeholder="Enter username" required>
         </div>
 
         <div class="form-group">
             <label>Email</label>
-            <input type="email" placeholder="Enter email" required>
+            <input type="email" name="email" placeholder="Enter email" required>
         </div>
 
         <div class="form-group">
             <label>Password</label>
-            <input type="password" placeholder="Enter password" required>
+            <input type="password" name="password" placeholder="Enter password" required>
         </div>
 
         <div class="form-group">
             <label>Confirm Password</label>
-            <input type="password" placeholder="Confirm password" required>
+            <input type="password" name="cpassword" placeholder="Confirm password" required>
         </div>
 
-        <button type="submit" class="register-btn">Register</button>
+        <button type="submit" name="rsubmit" class="register-btn">Register</button>
     </form>
 
     <div class="login-link">
-        Already have an account? <a href="login.html">Login</a>
+        Already have an account? <a href="login.php">Login</a>
     </div>
 </div>
 

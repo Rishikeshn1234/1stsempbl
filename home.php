@@ -103,11 +103,12 @@
     <h1>GMU E-Library</h1>
     <p>Your Digital Gateway to Knowledge</p>
     <nav>
-        <a href="user/login.html">
+        <a href="user/login.php">
     <button>Login</button>
     </a>
 
-    <a href="user/register.html">
+    <a href="user/register.php
+    ">
     <button>Register</button>
     </a>
 
