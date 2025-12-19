@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vinyas ❤️ Love & Melody</title>
+
+<style>
+:root{
+  --bg1:#120018;
+  --bg2:#1a0024;
+  --accent:#ff4d6d;
+  --accent2:#ff8fa3;
+  --text:#ffeef2;
+  --muted:#f2b6c6;
+  --glass:rgba(255,255,255,0.06);
+  --radius:16px;
+  --maxw:1200px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:system-ui,Segoe UI;
+  background:linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* Floating hearts */
+.hearts{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
+.heart{
+  position:absolute;
+  color:rgba(255,143,163,.6);
+  animation:floatUp linear infinite;
+}
+@keyframes floatUp{
+  from{transform:translateY(100vh);opacity:0}
+  20%{opacity:1}
+  to{transform:translateY(-120vh);opacity:0}
+}
+
+/* Topbar */
+.topbar{
+  position:fixed;
+  top:12px;left:0;right:0;
+  display:flex;
+  justify-content:center;
+  z-index:10;
+}
+.topbar .container{
+  max-width:var(--maxw);
+  width:100%;
+  padding:0 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.logo{
+  width:48px;height:48px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  display:grid;
+  place-items:center;
+  font-weight:900;
+}
+
+/* Hero */
+.hero{
+  padding:120px 20px 60px;
+  display:flex;
+  justify-content:center;
+  position:relative;
+  z-index:2;
+}
+.hero .container{
+  max-width:var(--maxw);
+  width:100%;
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:30px;
+}
+@media(max-width:900px){
+  .hero .container{grid-template-columns:1fr}
+}
+
+.card{
+  background:var(--glass);
+  backdrop-filter:blur(12px);
+  border-radius:var(--radius);
+  padding:24px;
+}
+.hero h1{
+  font-size:clamp(32px,5vw,52px);
+}
+.hero p{
+  color:var(--muted);
+  margin:16px 0;
+}
+
+.btn{
+  padding:12px 20px;
+  border-radius:30px;
+  border:none;
+  font-weight:700;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:white;
+  cursor:pointer;
+}
+
+/* Player */
+.player{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+/* Song Cover Image */
+.song-cover{
+  aspect-ratio:1/1;
+  border-radius:18px;
+  overflow:hidden;
+  background:linear-gradient(135deg,#ff758f,#ffb3c1);
+}
+.song-cover img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* Song List */
+.song-list button{
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  background:transparent;
+  border:1px solid rgba(255,255,255,.2);
+  color:var(--muted);
+  cursor:pointer;
+  text-align:left;
+  margin-top:6px;
+}
+.song-list button.active{
+  background:var(--accent);
+  color:white;
+}
+
+/* Controls */
+.controls{
+  display:flex;
+  justify-content:center;
+}
+.controls button{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  border:none;
+  background:var(--accent);
+  color:white;
+  font-size:20px;
+  cursor:pointer;
+}
+
+/* Progress bar */
+.progress{
+  height:6px;
+  background:rgba(255,255,255,.2);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress span{
+  display:block;
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#fff,var(--accent2));
+}
+
+/* Footer */
+footer{
+  text-align:center;
+  color:var(--muted);
+  padding:40px 20px 80px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="container">
+    <div class="logo">💖</div>
+    <strong>Vinyas</strong>
+  </div>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+
+    <!-- Left -->
+    <div class="card">
+      <h1>Love Becomes Music ❤️</h1>
+      <p>Two songs. One story. A romantic musical space for <b>Vinyas</b>.</p>
+      <button class="btn" onclick="togglePlay()">Play Love Song</button>
+    </div>
+
+    <!-- Player -->
+    <div class="card player">
+
+      <div class="song-cover">
+        <img id="cover" src="vinyas2.jpeg" alt="Song cover">
+      </div>
+
+      <strong id="songTitle">Vinyas & Anavi — College Lawn Love</strong>
+
+      <div class="song-list">
+        <button class="active" onclick="selectSong(0)">💗 College Lawn Love</button>
+        <button onclick="selectSong(1)">🌹 Forever Promise</button>
+      </div>
+
+      <div class="controls">
+        <button id="playBtn" onclick="togglePlay()">▶</button>
+      </div>
+
+      <div class="progress">
+        <span id="bar"></span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>© 2025 • For Vinyas • Made with ❤️</footer>
+
+<!-- Audio -->
+<audio id="audio"></audio>
+
+<script>
+  alert("ಈ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ತೋರಿಸಲಾದ ಎಲ್ಲಾ ಪಾತ್ರಗಳು ಮತ್ತು ವ್ಯಕ್ತಿಗಳು ನಿಜವಾದವರು ಅಲ್ಲ. ಇವು ಕೇವಲ ಮನರಂಜನೆಯ ಉದ್ದೇಶಕ್ಕಾಗಿ ಮಾತ್ರ.")
+  alert("Did you Understand!!!")
+  alert("OK na chinna??")
+  alert("ನೊಂದುಕೊಳ್ಳಬೇಡ")
+  alert("All right! ಇನ್ನೂ ಮುಂದೆ ಸಾಗೋಣ")
+/* Floating hearts */
+const hearts=document.getElementById('hearts');
+for(let i=0;i<35;i++){
+  const h=document.createElement('div');
+  h.className='heart';
+  h.textContent='❤';
+  h.style.left=Math.random()*100+'%';
+  h.style.fontSize=(14+Math.random()*22)+'px';
+  h.style.animationDuration=(6+Math.random()*6)+'s';
+  hearts.appendChild(h);
+}
+
+/* Songs data */
+const songs=[
+  {
+    title:'Vinyas & Anavi — College Lawn Love',
+    src:'vinyas2.mpeg',
+    img:'vinyas2.jpeg'
+  },
+  {
+    title:'Vinyas & Anavi — Forever Promise',
+    src:'vinyas1.mpeg',
+    img:'vinyas1.jpeg'
+  }
+];
+
+let current=0;
+let playing=false;
+
+const audio=document.getElementById('audio');
+const cover=document.getElementById('cover');
+const titleEl=document.getElementById('songTitle');
+const bar=document.getElementById('bar');
+const playBtn=document.getElementById('playBtn');
+
+/* Select song */
+function selectSong(i){
+  current=i;
+  document.querySelectorAll('.song-list button')
+    .forEach((b,idx)=>b.classList.toggle('active',idx===i));
+
+  titleEl.textContent=songs[i].title;
+  cover.src=songs[i].img;
+
+  audio.src=songs[i].src;
+  audio.load();
+
+  resetPlayer();
+}
+
+/* Play / Pause */
+function togglePlay(){
+  if(!audio.src) audio.src=songs[current].src;
+
+  if(!playing){
+    audio.play();
+    playing=true;
+    playBtn.textContent='⏸';
+    requestAnimationFrame(updateProgress);
+  }else{
+    audio.pause();
+    playing=false;
+    playBtn.textContent='▶';
+  }
+}
+
+/* Progress bar */
+function updateProgress(){
+  if(audio.duration){
+    bar.style.width=(audio.currentTime/audio.duration)*100+'%';
+  }
+  if(playing) requestAnimationFrame(updateProgress);
+}
+
+/* Reset */
+function resetPlayer(){
+  playing=false;
+  playBtn.textContent='▶';
+  bar.style.width='0%';
+}
+</script>
+
+</body>
+</html>
